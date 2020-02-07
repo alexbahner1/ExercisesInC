@@ -14,7 +14,7 @@ int *foo() {
     int i;
     int array[SIZE];
 
-    printf("%p\n", array);
+    // printf("%p\n", array);
 
     for (i=0; i<SIZE; i++) {
         array[i] = 42;
@@ -26,7 +26,7 @@ void bar() {
     int i;
     int array[SIZE];
 
-    printf("%p\n", array);
+    // printf("%p\n", array);
 
     for (i=0; i<SIZE; i++) {
         array[i] = i;
@@ -45,3 +45,11 @@ int main()
 
     return 0;
 }
+
+/// this make foo make a arrray but the array goes anyway this is problem
+// it would output and fair arry of 42s 5 of them  but it wont
+///warning: function returns address of local variable [-Wreturn-local-addr]
+// this is beasue of what i say above to array in in the stack in foo not in main
+
+// I got a seg fault for reason above this. Also the address is the same beacause the space opens up
+// Nothing Defferint 
