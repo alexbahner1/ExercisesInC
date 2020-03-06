@@ -31,7 +31,15 @@ typedef regex_t Regex;
 */
 Regex *make_regex(char *pattern, int flags) {
     // FILL THIS IN!
-    return NULL;
+    int ret;
+    regex_t *regex = malloc(sizeof(regex_t));
+
+    ret = regcomp(regex, pattern, flags);
+    if (ret) {
+      fprintf(stderr, "Could not compile regex\n");
+      exit(1);
+    }
+    return regex;
 }
 
 /* Checks whether a regex matches a string.
@@ -42,7 +50,9 @@ Regex *make_regex(char *pattern, int flags) {
 */
 int regex_match(Regex *regex, char *s) {
     // FILL THIS IN!
-    return 0;
+    int ret;
+    ret = regexec(regex, s, 0, NULL, 0);
+    return !ret;
 }
 
 /* Frees a Regex.
@@ -51,6 +61,7 @@ int regex_match(Regex *regex, char *s) {
 */
 void regex_free(Regex *regex) {
     // FILL THIS IN!
+    regfree(regex);
 }
 
 
@@ -76,7 +87,7 @@ void find_track_regex(char pattern[])
 
 int main (int argc, char *argv[])
 {
-    char *pattern = "F.*F.*";
+    char *pattern =  "S.*W.*";//"F.*F.*";
     find_track_regex(pattern);
 
     return 0;
